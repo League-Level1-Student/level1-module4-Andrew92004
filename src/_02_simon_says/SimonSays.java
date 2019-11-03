@@ -45,25 +45,38 @@ JFrame frame = new JFrame();
 		// 4. Call the showImage method to show an image
 showImage();
 	}
-
+	int points = 0;
 	public void keyPressed(KeyEvent e) {
 		// 15. Make a points variable to track the score.
-int points = 0;
+
 		// 16. If the keyCode matches the imageIndex and "Simon says"
 if(simonSays && e.getKeyCode()==imageIndex) {
 points++;
+tries++;
 
 		// 17. Increase the value of score
 
 		// 18. Use the speak method to tell the user they were correct
 speak("You were correct");
+}else if (simonSays == false && e.getKeyCode()!=imageIndex) {
+			tries++;
+			points++;
+			speak("You were correct");
+}
+else {
+	speak("You were wrong");
 }
 		// 19. If the keyCode doesn't match the imageIndex and "Simon didn't
 		// say..."
-if(!(simonSays && e.getKeyCode()==imageIndex)) {
-	points++;
-	speak("You were correct");
+
+if (tries >= 3) {
+	speak("You got " + points  +" points!");
+
+	System.exit(0);
 }
+frame.dispose();
+
+showImage();
 		// 20. Increase the value of score
 
 		// 21. Use the speak method to tell the user they were correct
@@ -83,7 +96,7 @@ if(!(simonSays && e.getKeyCode()==imageIndex)) {
 
 	private void showImage() {
 		// 5. Initialize your frame to a new JFrame()
-
+frame = new JFrame();
 		// 6. Set the frame to visible
 frame.setVisible(true);
 		// 7. Uncomment the following line to add a random image to your frame
@@ -103,9 +116,12 @@ Random random = new Random();
 simonSays = random.nextBoolean();
 		// 13. Use the Random and the speak method to either say
 		// "Simon says press this key" or "Press this key"
-speak("Simon says press this key");
+
+if(simonSays) {
+	speak("Simon says press this key");
+}else {
 speak("press this key");
-		// 14. Above, set the value of simonSays to true/false appropriately
+}		// 14. Above, set the value of simonSays to true/false appropriately
 
 	}
 
