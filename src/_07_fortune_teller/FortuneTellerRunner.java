@@ -14,6 +14,6 @@ public class FortuneTellerRunner {
     
     static void begin() {
       	 // Welcome the user. Give them a hint for the secret location.
-
+System.out.println("Hi welcome. The hint is that the secret location is near the top left of the sceen. Omg such intense hint ull never get it");
     }
 }
